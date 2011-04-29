@@ -37,8 +37,7 @@
 			card.isDealt = false;
 			card.image = "images/"+value + ".png"
 			
-			return card;
-			
+			return card;			
 		},
 		
 	deal: function(){
@@ -65,17 +64,83 @@
 		
 	},
 		
-	shuffle: function(){
-	
+	shuffle: function(){	
 		this.table.deck([]);
 		this.table.flop([]);
 		this.table.turn();
 		this.table.river();
 		this.table.p1Cards([]);
 		this.table.p2Cards([]);
-		this.buildDeck();
-			
+		this.buildDeck();			
+	},
+	flopResult: function(cards){
+		var self = this;
+		var resultMessage = "";
+		var count =0;
+		var board = self.table.flop();
+		if(cards[0].rank == cards[1].rank)
+			{
+				count+=1;
+				resultMessage = self.checkCard(cards[0],count,board);				
+			}
+		else{
+			$.each(cards, function(i){
+				resultMessage = self.checkCard(cards[i],count,board);
+			});
+		}
+		return resultMessage;
+	},
+	turnResult: function(cards){
+		var self = this;
+		var resultMessage = "";
+		var count =0;
+		var board = self.table.flop();
+		board.push(self.table.turn());
+		if(cards[0].rank == cards[1].rank)
+			{
+				count+=1;
+				resultMessage = self.checkCard(cards[0],count,board);				
+			}
+		else{
+			$.each(cards, function(i){
+				resultMessage = self.checkCard(cards[i],count,board);
+			});
+		}
+		return resultMessage;
+	},
+	riverResult: function(cards){
+		var self = this;
+		var resultMessage = "";
+		var count =0;
+		var board = self.table.flop();
+		board.push(self.table.turn());
+		board.push(self.table.river());
+		if(cards[0].rank == cards[1].rank)
+			{
+				count+=1;
+				resultMessage += self.checkCard(cards[0],count,board);				
+			}
+		else{
+			$.each(cards, function(i){
+				resultMessage += self.checkCard(cards[i],count,board);
+			});
+		}
+		return resultMessage;
+	},
+	checkCard: function(card, count, board){
+				var resultMessage = "";
+				var result = $.grep(board, function(c){return c.rank == card.rank});
+				count+=result.length;
+				if(count ==1){
+					resultMessage += " Pair of " + card.valueName + "s";
+				}
+				if(count ==2){
+					resultMessage += " Three " + card.valueName+ "s";
+				}
+				if(count ==3){
+					resultMessage += " Four " + card.valueName+ "s";
+				}
+				return resultMessage;
 	}
-		
 	
 }

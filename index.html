@@ -29,17 +29,23 @@
 		$("#flop1").attr("src", TableModel.table.flop()[0].image);
 		$("#flop2").attr("src", TableModel.table.flop()[1].image);
 		$("#flop3").attr("src", TableModel.table.flop()[2].image);
+		$("#p1-hand").attr("innerHTML" ,"Player 1 Has:" +TableModel.flopResult(TableModel.table.p1Cards()));
+		$("#p2-hand").attr("innerHTML" ,"Player 2 Has:" +TableModel.flopResult(TableModel.table.p2Cards()));
   };
   var turn1 = function(){		
 		$("#turn-button").toggle();
 		$("#river-button").toggle();
 		$("#turn").attr("src", TableModel.table.turn().image);
+		$("#p1-hand").attr("innerHTML" ,"Player 1 Has:" +TableModel.turnResult(TableModel.table.p1Cards()));
+		$("#p2-hand").attr("innerHTML" ,"Player 2 Has:" +TableModel.turnResult(TableModel.table.p2Cards()));
   };
   var river1 = function(){
 		
 		$("#river-button").toggle();
 		$("#shuffle-button").toggle();
 		$("#river").attr("src", TableModel.table.river().image);
+		$("#p1-hand").attr("innerHTML" ,"Player 1 Has:" +TableModel.riverResult(TableModel.table.p1Cards()));
+		$("#p2-hand").attr("innerHTML" ,"Player 2 Has:" +TableModel.riverResult(TableModel.table.p2Cards()));
   };
   var shuffle = function(){
 		TableModel.shuffle();
@@ -54,6 +60,8 @@
 		$("#p1card2").attr("src", "images/b2fv.png");
 		$("#p2card1").attr("src", "images/b2fv.png");
 		$("#p2card2").attr("src", "images/b2fv.png");
+		$("#p1-hand").attr("innerHTML","");
+		$("#p2-hand").attr("innerHTML","");
   };
   
   $(document).ready(function () {
@@ -80,6 +88,10 @@
 			<a onclick=turn1() ><input id="turn-button" type="button" value="turn" style="display: none;"/></a>
 			<a onclick=river1() ><input id="river-button" type="button" value="river" style="display: none;"/></a>
 			<a onclick=shuffle() ><input id="shuffle-button" type="button" value="shuffle" style="display: none;"/></a>
+	</div>
+	<div class="grid_16">
+		<span id="p1-hand"></span></br>
+		<span id="p2-hand"></span></br>
 	</div>
 	<div class="prefix_4 grid_10 suffix_2 ">
 		<h3 class="first-card">Player 1 Cards</h3></br>
