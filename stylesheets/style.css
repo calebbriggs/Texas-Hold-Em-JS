@@ -27,85 +27,14 @@ img{
 	font-weight: normal;
 	font-style: normal; }
 .
-.center{text-align: center}
+.center{text-align: center;}
+.right{float:right;}
+.border{border-style: solid; border-width: 1px;  border-color: white;}
+.white-text{color:white;}
 
-/* Forms */
-
-    
-/* Text colors */
-.color0,.bg-color4,.bg-color5,.bg-color6,.bg-color6 a:hover,.bg-color7,.bg-color8,.bg-color9,.bg-color12,.bg-color13,.bg-color15,.bg-color16,.bg-color17,.bg-color21,
-.pages a:hover,.pages a.current-page,.hd-toggle .active, fieldset legend:hover,.tabs .tab-control li.active a,.navigation li.selected a{ 
-	color:#fff } /*  secondary text and header color   */
-.color1,.color1 a{color:#57a748;} /* used on tags: <h1-h2> main text color, usually will be link */
-.color2,a,.bg-color9 a:hover, .color2 a:hover{ color:#FF7800; } /* a main default link color, site text color */
-.color3{ color: #FF9900; } /*  tinted color of .color2, used in some hover states (footer hovers), used in some icon navigational elements  */
-.color4{ color:#DAAD78 } /*  tone of .color2, used for sub text items that are a part of link displays but need to be singled out */ 
-.color5{ color: #42545E; } /* used for deals sections links */
-.color6{ color:#65899F; } /*  secondary venue section block headers*/
-.color7,.bg-color6 a{ color:#6AB6CF; } /* primary navigation text color */
-.color8,.bg-color9 a{ color:#c2def2; }  /* footer link text color */
-.color9,body{ color:#666; }  /*  primary body text color  */
-.color10,fieldset legend,.form-label,.tabs .tab-control li a { color:#909090; } /* secondary text and alt header text color */
-.color11{ color:#e7e7e7; }
-.color12{ color: #363636; }
-.color13,.mod-fb a,.mod-fb-like a{ color: #3B5998; } /* Facebook blue link color */
-
-/* Background colors */
-.bg-color0,.drilldown .inner,.odd,.basic-row,.alert,.bg-color14,.basic-row,.tabs .tab-control li { background-color:#fff; } /* white bg - duh! --*/
-.bg-color1,.basic-ext .inner,.drilldown,.bg-color10,.bg-color11{ 
-	background-color:#e7e7e7; } /* main mod bg color */
-.bg-color2{ background-color:#F1F7FC } /* main venue bg color */
-.bg-color3{background-color:#D4E7F5} /* secondary venue bg color and deals ftr */
-.bg-color4,.pages a:hover,.pages a.current-page,.bg-color16,.hd-toggle .active{background-color:#999} /* secondary brc headers */
-.bg-color5,.bg-color12{background-color:#57a748;} /* global search bar hdr, 7 day event hdr color */
-.bg-color6{background-color:#33424B} /* main nav bg color */
-.bg-color7,{background-color:#232E36} /* main nav bar "selected" color */
-.navigation li.selected a:hover{background-color: transparent;}
-.bg-color8,.bg-color13{background-color:#526C7C} /* used in search bar button area */
 .bg-color9,.bg-color9 a{background-color:#01471C} /* footer links part of footer */
 
 
 
-/* Gradients */
-.bg-color10, .tabs .tab-control li a, .ui-slider-horizontal{ background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(#D6D6D6)); background-image: -moz-linear-gradient(100% 100% 90deg,#D6D6D6, #f7f7f7); }
-.bg-color11{background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7e7e7), to(#fff)); background-image: -moz-linear-gradient(100% 100% 90deg,#fff, #e7e7e7);}
-.bg-color12{background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#57a748), to(#2E6C20)); background-image: -moz-linear-gradient(100% 100% 90deg,#2E6C20, #57a748); }
-.bg-color13, fieldset legend:hover,.tabs .tab-control li.active a{background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#72B5E2), to(#536a7a)); background-image: -moz-linear-gradient(100% 100% 90deg,#536a7a, #72B5E2); }
-.bg-color14,.basic-row,div.jGrowl div.jGrowl-notification.notification-banner{	 background-image: -webkit-gradient(linear, 0% 50%, 0% 100%, from(#fff), to(#e7e7e7)); background-image: -moz-linear-gradient(center top , #FFFFFF 75%, #e7e7e7); }
-.bg-color15 { background-color: #6ab6cf; }
-.bg-color16,.hd-toggle .active{ background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#888), to(#bbb)); background-image: -moz-linear-gradient(100% 100% 90deg,#bbb, #888); }
-.bg-color17{ background-color: #c5c5c5; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d6d6d6), to(#b4b4b4)); background-image: -moz-linear-gradient(100% 100% 90deg,#b4b4b4, #d6d6d6); }
-.bg-color18 {background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee)); background-image: -moz-linear-gradient(center top , #FFFFFF 50%, #eee);}
-.bg-color19 {background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#84c8db), to(#51a4c3)); background-image: -moz-linear-gradient(100% 100% 90deg, #51a4c3, #84c8db);}
-.bg-color20 {background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D4E7F5), to(#ecf5fb)); background-image: -moz-linear-gradient(100% 100% 90deg, #ecf5fb, #D4E7F5);}
-.bg-color21 {background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#739bb1), to(#567896)); background-image: -moz-linear-gradient(100% 100% 90deg, #567896, #739bb1);}
 
-
-/** DON'T FORGET TO ADD IE VERSIONS OF ANY NEW GRADIENTS IN IE.CSS **/
-/* dont delete - prev. main hdr color .bg-color13{ background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#71B1D5), to(#526d7e)); background-image: -moz-linear-gradient(100% 100% 90deg,#526d7e, #71B1D5); }*/
-/* dont delete - original navigation gradient 
-.nav-bg{	
-	color:white; background-color: #333E44; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#344652), to(#2d343a)); background-image: -moz-linear-gradient(100% 100% 90deg,#2d343a, #344652);
-}*/
-/* link behaviors */ 
-a { font-weight: bold; text-decoration:none; outline: none; cursor: pointer; }
-a:hover,a:visited:hover{ text-decoration:underline}
-
-/* resets underline behavior */
-a.reset-underline,a.reset-underline:hover,.bg-color6 a:hover,.bg-color6 a:visited:hover,.pages a:hover{ text-decoration:none}
-a:hover,a:visited:hover,a.button:hover{ 
-	filter:alpha(opacity=75);
-	-moz-opacity:0.75;
-	-khtml-opacity: 0.75;
-	opacity: 0.75;
- }
- sup {/*font-weight:bold;*/ display:inline; font-size:55%; vertical-align:top}
-
- /* resets opacity of certain element/class combos back to 100% */
-.bg-color6 a:visited,.bg-color9 a:visited,.bg-color6 a:hover,.bg-color9 a:hover,.bg-color6 a:visited:hover,.bg-color9 a:link,.button-disabled span:hover,.leaderboard-ad a:hover,.opacityreset,.opacityreset:hover,.opacityreset a:hover, #fdbk_tab, a.ogreearslink{ 
-	filter:alpha(opacity=100);
-	-moz-opacity:1;
-	-khtml-opacity: 1;
-	opacity: 1;
- }
  

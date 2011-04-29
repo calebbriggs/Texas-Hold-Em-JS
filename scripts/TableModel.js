@@ -10,7 +10,6 @@
 	},
 	
 	suits: new Array("Clubs","Spades","Hearts","Diamonds"),
-	imageNames: [],
 	cardNames: new Array("Ace","King","Queen","Jack","Ten","Nine","Eight","Seven","Six","Five","Four","Three","Two"),
 	
 	buildDeck: function(){
@@ -19,17 +18,19 @@
 		$.each(self.cardNames, function(x){
 			$.each(self.suits, function(y){
 				
-				self.table.deck.push(self.newCard(self.cardNames[x],self.suits[y], value));
+				self.table.deck.push(self.newCard(self.cardNames[x],self.suits[y], value,y));
 				value +=1;
 			});
 		});
 		
 	},	
-	newCard: function(cardName, s, value){
+	newCard: function(cardName, s, value, rank){
 			var card = new Object();
 			card.name= cardName+" of "+ s;
 			card.suit = s;
-			card.value = value;	
+			card.value = value;
+			card.valueName = cardName;
+			card.rank = rank;
 			card.isDealt = false;
 			card.image = "images/"+value + ".png"
 			
@@ -54,20 +55,14 @@
 			var self = this;
 			var randomnumber = Math.floor(Math.random()*52);
 			var card = self.table.deck()[randomnumber];
-			if (card.isDealt)	
-				self.getCard();
-			else
-				{
-					if(card){
-						card.isDealt = true;
-						return card;
-					}
-					
-					else
-					self.getCard();
-				}
-		
+			while(!card || card.isDealt)
+				card = self.getCard();
+			return card;	
+			
 		},
+		
+		
+		
 		
 		shuffle: function(){
 		
