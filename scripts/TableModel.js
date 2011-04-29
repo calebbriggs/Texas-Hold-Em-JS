@@ -1,12 +1,12 @@
 ﻿var TableModel = {	
                 
     table:{
-		deck: ko.observableArray([]),
-		flop: ko.observableArray([]),
-		turn: ko.observable(),
-		river: ko.observable(),
-		p1Cards: ko.observableArray([]),
-		p2Cards: ko.observableArray([])	
+		deck: [],
+		flop: [],
+		turn: new Object(),
+		river: new Object(),
+		p1Cards: [],
+		p2Cards: []	
 	},
 	
 	suits: new Array("Clubs","Spades","Hearts","Diamonds"),
@@ -49,14 +49,14 @@
 		self.table.flop.push(self.getCard());
 		self.table.flop.push(self.getCard());
 		self.table.flop.push(self.getCard());
-		self.table.turn(self.getCard());
-		self.table.river(self.getCard());		
+		self.table.turn=self.getCard();
+		self.table.river=self.getCard();		
 	},
 	
 	getCard: function(){
 		var self = this;
 		var randomnumber = Math.floor(Math.random()*52);
-		var card = self.table.deck()[randomnumber];
+		var card = self.table.deck[randomnumber];
 		if(card.isDealt)
 			card = self.getCard();
 		card.isDealt = true;
@@ -65,27 +65,28 @@
 	},
 		
 	shuffle: function(){	
-		this.table.deck([]);
-		this.table.flop([]);
-		this.table.turn();
-		this.table.river();
-		this.table.p1Cards([]);
-		this.table.p2Cards([]);
+		this.table.deck=[];
+		this.table.flop=[];
+		this.table.turn=new Object();
+		this.table.river=new Object();
+		this.table.p1Cards=[];
+		this.table.p2Cards=[];
 		this.buildDeck();			
 	},
 	flopResult: function(cards){
 		var self = this;
 		var resultMessage = "";
 		var count =0;
-		var board = self.table.flop();
+		var board = self.table.flop;
 		if(cards[0].rank == cards[1].rank)
 			{
 				count+=1;
-				resultMessage = self.checkCard(cards[0],count,board);				
+				resultMessage += self.checkCard(cards[0],count,board);				
 			}
 		else{
 			$.each(cards, function(i){
-				resultMessage = self.checkCard(cards[i],count,board);
+				count = 0;
+				resultMessage += self.checkCard(cards[i],count,board);
 			});
 		}
 		return resultMessage;
@@ -94,27 +95,12 @@
 		var self = this;
 		var resultMessage = "";
 		var count =0;
-		var board = self.table.flop();
-		board.push(self.table.turn());
-		if(cards[0].rank == cards[1].rank)
-			{
-				count+=1;
-				resultMessage = self.checkCard(cards[0],count,board);				
-			}
-		else{
-			$.each(cards, function(i){
-				resultMessage = self.checkCard(cards[i],count,board);
-			});
-		}
-		return resultMessage;
-	},
-	riverResult: function(cards){
-		var self = this;
-		var resultMessage = "";
-		var count =0;
-		var board = self.table.flop();
-		board.push(self.table.turn());
-		board.push(self.table.river());
+		var board = [];
+		$.each(self.table.flop, function(i){
+				board.push(self.table.flop[i]);
+		});
+		board.push(self.table.turn);
+		
 		if(cards[0].rank == cards[1].rank)
 			{
 				count+=1;
@@ -127,10 +113,36 @@
 		}
 		return resultMessage;
 	},
+	riverResult: function(cards){
+		var self = this;
+		var resultMessage = "";
+		var count =0;
+		var board = [];
+		$.each(self.table.flop, function(i){
+				board.push(self.table.flop[i]);
+		});
+		board.push(self.table.turn);
+		board.push(self.table.river);
+		
+		
+		if(cards[0].rank == cards[1].rank)
+			{
+				count+=1;
+				resultMessage += self.checkCard(cards[0],count,board);				
+			}
+		else{
+			$.each(cards, function(i){
+				
+				resultMessage += self.checkCard(cards[i],count,board);
+			});
+		}
+		return resultMessage;
+	},
 	checkCard: function(card, count, board){
 				var resultMessage = "";
-				var result = $.grep(board, function(c){return c.rank == card.rank});
-				count+=result.length;
+				count += $.grep(board, function(c){return c.rank == card.rank}).length;
+							
+				
 				if(count ==1){
 					resultMessage += " Pair of " + card.valueName + "s";
 				}
