@@ -38,43 +38,41 @@
 			
 		},
 		
-		deal: function(){
-			var self = this;
-			self.table.p1Cards.push(self.getCard());
-			self.table.p1Cards.push(self.getCard());
-			self.table.p2Cards.push(self.getCard());
-			self.table.p2Cards.push(self.getCard());
-			self.table.flop.push(self.getCard());
-			self.table.flop.push(self.getCard());
-			self.table.flop.push(self.getCard());
-			self.table.turn(self.getCard());
-			self.table.river(self.getCard());		
-		},
+	deal: function(){
+		var self = this;
+		self.table.p1Cards.push(self.getCard());
+		self.table.p1Cards.push(self.getCard());
+		self.table.p2Cards.push(self.getCard());
+		self.table.p2Cards.push(self.getCard());
+		self.table.flop.push(self.getCard());
+		self.table.flop.push(self.getCard());
+		self.table.flop.push(self.getCard());
+		self.table.turn(self.getCard());
+		self.table.river(self.getCard());		
+	},
+	
+	getCard: function(){
+		var self = this;
+		var randomnumber = Math.floor(Math.random()*52);
+		var card = self.table.deck()[randomnumber];
+		if(card.isDealt)
+			card = self.getCard();
+		card.isDealt = true;
+		return card;	
 		
-		getCard: function(){
-			var self = this;
-			var randomnumber = Math.floor(Math.random()*52);
-			var card = self.table.deck()[randomnumber];
-			while(!card || card.isDealt)
-				card = self.getCard();
-			return card;	
+	},
+		
+	shuffle: function(){
+	
+		this.table.deck([]);
+		this.table.flop([]);
+		this.table.turn();
+		this.table.river();
+		this.table.p1Cards([]);
+		this.table.p2Cards([]);
+		this.buildDeck();
 			
-		},
-		
-		
-		
-		
-		shuffle: function(){
-		
-			this.table.deck([]);
-			this.table.flop([]);
-			this.table.turn();
-			this.table.river();
-			this.table.p1Cards([]);
-			this.table.p2Cards([]);
-			this.buildDeck();
-				
-		}
+	}
 		
 	
 }
