@@ -14,11 +14,14 @@
 	
 	buildDeck: function(){
 		var value= 1;
+		var rank = 0;
 		var self =this;
 		$.each(self.cardNames, function(x){
-			$.each(self.suits, function(y){
-				
-				self.table.deck.push(self.newCard(self.cardNames[x],self.suits[y], value,y));
+			$.each(self.suits, function(y){				
+				mod = y % 4;
+				if(mod == 0)
+					rank+=1;
+				self.table.deck.push(self.newCard(self.cardNames[x],self.suits[y], value,rank));
 				value +=1;
 			});
 		});
