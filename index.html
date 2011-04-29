@@ -8,7 +8,60 @@
   <link rel="stylesheet" href="stylesheets/reset.css">
   <link rel="stylesheet" href="stylesheets/structure.css">
   <link rel="stylesheet" href="stylesheets/style.css">
+  <script src="scripts/jquery-1.5.1.js" type="text/javascript"></script>
+  <script src="scripts/knockout-latest.debug.js" type="text/javascript"></script>
+  <script src="scripts/TableModel.js" type="text/javascript"></script>
+  <script type="text/javascript">
   
+  var deal = function(){
+		TableModel.deal();
+		$("#deal-button").toggle();
+		$("#flop-button").toggle();
+		$("#p1card1").attr("src", TableModel.table.p1Cards()[0].image);
+		$("#p1card2").attr("src", TableModel.table.p1Cards()[1].image);
+		$("#p2card1").attr("src", TableModel.table.p2Cards()[0].image);
+		$("#p2card2").attr("src", TableModel.table.p2Cards()[1].image);
+  };
+  var flop = function(){
+		
+		$("#flop-button").toggle();
+		$("#turn-button").toggle();
+		$("#flop1").attr("src", TableModel.table.flop()[0].image);
+		$("#flop2").attr("src", TableModel.table.flop()[1].image);
+		$("#flop3").attr("src", TableModel.table.flop()[2].image);
+  };
+  var turn1 = function(){		
+		$("#turn-button").toggle();
+		$("#river-button").toggle();
+		$("#turn").attr("src", TableModel.table.turn().image);
+  };
+  var river1 = function(){
+		
+		$("#river-button").toggle();
+		$("#shuffle-button").toggle();
+		$("#river").attr("src", TableModel.table.river().image);
+  };
+  var shuffle = function(){
+		TableModel.shuffle();
+		$("#shuffle-button").toggle();
+		$("#deal-button").toggle();
+		$("#flop1").attr("src", "images/b2fv.png");
+		$("#flop2").attr("src", "images/b2fv.png");
+		$("#flop3").attr("src", "images/b2fv.png");
+		$("#turn").attr("src", "images/b2fv.png");
+		$("#river").attr("src", "images/b2fv.png");
+		$("#p1card1").attr("src", "images/b2fv.png");
+		$("#p1card2").attr("src", "images/b2fv.png");
+		$("#p2card1").attr("src", "images/b2fv.png");
+		$("#p2card2").attr("src", "images/b2fv.png");
+  };
+  
+  $(document).ready(function () {
+					TableModel.buildDeck();
+						ko.applyBindings(TableModel);
+					});
+  
+  </script>
 
 </head>
 
@@ -21,19 +74,25 @@
 	</div>
 	<div class="clear"> </div>
 	<div class="greenline"></div>
+	<div class="prefix_15 grid_1">
+			<a onclick=deal() ><input id="deal-button" type="button" value="deal"/></a>
+			<a onclick=flop() ><input id="flop-button" type="button" value="flop" style="display: none;"/></a>
+			<a onclick=turn1() ><input id="turn-button" type="button" value="turn" style="display: none;"/></a>
+			<a onclick=river1() ><input id="river-button" type="button" value="river" style="display: none;"/></a>
+			<a onclick=shuffle() ><input id="shuffle-button" type="button" value="shuffle" style="display: none;"/></a>
+	</div>
 	<div class="prefix_4 grid_10 suffix_2 ">
-		<img class="first-card" src="images/1.png"/>
-		<img src="images/2.png"/>
+		<img id="p1card1" class="first-card" src="images/b2fv.png"/>
+		<img id="p1card2" src="images/b2fv.png"/>
 			</br>	
-		<img src="images/10.png"/>
-		<img src="images/15.png"/>
-		<img src="images/20.png"/>
-		<img src="images/25.png"/>
-		<img src="images/30.png"/>
-
+		<img id="flop1" src="images/b2fv.png"/>
+		<img id="flop2" src="images/b2fv.png"/>
+		<img id="flop3" src="images/b2fv.png"/>
+		<img id="turn"  src="images/b2fv.png"/>
+		<img id="river" src="images/b2fv.png"/>
 		</br>	
-		<img class="first-card" src="images/5.png"/>
-		<img src="images/6.png"/>
+		<img id="p2card1" class="first-card" src="images/b2fv.png"/>
+		<img id="p2card2" src="images/b2fv.png"/>
 		
 	</div>
 		
