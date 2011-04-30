@@ -87,8 +87,11 @@
 			$.each(cards, function(i){
 				count = 0;
 				resultMessage += self.checkCard(cards[i],count,board);
-			});
+			});		
 		}
+		
+		resultMessage += self.checkBoard(cards, board);
+		
 		return resultMessage;
 	},
 	turnResult: function(cards){
@@ -111,6 +114,7 @@
 				resultMessage += self.checkCard(cards[i],count,board);
 			});
 		}
+		resultMessage += self.checkBoard(cards, board);
 		return resultMessage;
 	},
 	riverResult: function(cards){
@@ -136,6 +140,7 @@
 				resultMessage += self.checkCard(cards[i],count,board);
 			});
 		}
+		resultMessage += self.checkBoard(cards, board);
 		return resultMessage;
 	},
 	checkCard: function(card, count, board){
@@ -152,6 +157,56 @@
 				if(count ==3){
 					resultMessage += " Four " + card.valueName+ "s";
 				}
+				return resultMessage;
+	},
+	
+	checkBoard: function(cards, board){
+				var resultMessage = "";
+				var matches = [];
+				var temp = [];
+				$.each(board, function(i){temp.push(board[i])});
+				$.each(temp, function(i){
+				
+								if(temp[i].rank != cards[0].rank && temp[i].rank != cards[1].rank ){								
+										var match = $.grep(temp, function(c){return c.rank == temp[i].rank});										
+										if(match.length >1)
+											matches.push(match[0]);										
+								}				
+				});
+				
+				$.each(matches, function(i){
+						var checkMatches = $.grep(matches, function(c){return c.rank == matches[i].rank});
+				
+						if(checkMatches.length >1){
+								
+									var count = $.grep(temp, function(c){return c.rank == matches[i].rank}).length;
+									if(count ==2){
+										resultMessage += " Pair of " + matches[i].valueName + "s";
+									}
+									if(count ==3){
+										resultMessage += " Three " + matches[i].valueName+ "s";
+									}
+									if(count ==4){
+										resultMessage += " Four " + matches[i].valueName+ "s";
+									}
+									return resultMessage;						
+						}
+						else{
+					
+							var count = $.grep(temp, function(c){return c.rank == matches[i].rank}).length;
+								temp.remove(matches[i]);
+								if(count ==2){
+									resultMessage += " Pair of " + matches[i].valueName + "s";
+								}
+								if(count ==3){
+									resultMessage += " Three " + matches[i].valueName+ "s";
+								}
+								if(count ==4){
+									resultMessage += " Four " + matches[i].valueName+ "s";
+								}
+								
+						}
+				});
 				return resultMessage;
 	}
 	
