@@ -168,44 +168,29 @@
 				$.each(temp, function(i){
 				
 								if(temp[i].rank != cards[0].rank && temp[i].rank != cards[1].rank ){								
-										var match = $.grep(temp, function(c){return c.rank == temp[i].rank});										
-										if(match.length >1)
-											matches.push(match[0]);										
+										var match = $.grep(temp, function(c){return c.rank == temp[i].rank});
+										
+										if(match.length >1 )
+										{	//this will check to make sure our paired cards only gets into the matches array once
+											var checkMatchesLength = $.grep(matches, function(c){return c.rank== match[0].rank}).length;
+											if(checkMatchesLength <1)
+												matches.push(match[0]);		
+										}											
 								}				
 				});
 				
 				$.each(matches, function(i){
-						var checkMatches = $.grep(matches, function(c){return c.rank == matches[i].rank});
-				
-						if(checkMatches.length >1){
-								
-									var count = $.grep(temp, function(c){return c.rank == matches[i].rank}).length;
-									if(count ==2){
-										resultMessage += " Pair of " + matches[i].valueName + "s";
-									}
-									if(count ==3){
-										resultMessage += " Three " + matches[i].valueName+ "s";
-									}
-									if(count ==4){
-										resultMessage += " Four " + matches[i].valueName+ "s";
-									}
-									return resultMessage;						
+						var count = $.grep(temp, function(c){return c.rank == matches[i].rank}).length;
+						
+						if(count ==2){
+							resultMessage += " Pair of " + matches[i].valueName + "s";
 						}
-						else{
-					
-							var count = $.grep(temp, function(c){return c.rank == matches[i].rank}).length;
-								temp.remove(matches[i]);
-								if(count ==2){
-									resultMessage += " Pair of " + matches[i].valueName + "s";
-								}
-								if(count ==3){
-									resultMessage += " Three " + matches[i].valueName+ "s";
-								}
-								if(count ==4){
-									resultMessage += " Four " + matches[i].valueName+ "s";
-								}
-								
+						if(count ==3){
+							resultMessage += " Three " + matches[i].valueName+ "s";
 						}
+						if(count ==4){
+							resultMessage += " Four " + matches[i].valueName+ "s";
+						}						
 				});
 				return resultMessage;
 	}
