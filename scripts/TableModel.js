@@ -92,6 +92,10 @@
 		
 		resultMessage += self.checkBoard(cards, board);
 		
+		if(resultMessage==""){		
+			resultMessage = self.getHighCard(cards, board);			
+		}
+		
 		return resultMessage;
 	},
 	turnResult: function(cards){
@@ -115,6 +119,9 @@
 			});
 		}
 		resultMessage += self.checkBoard(cards, board);
+		if(resultMessage==""){		
+			resultMessage = self.getHighCard(cards, board);			
+		}
 		return resultMessage;
 	},
 	riverResult: function(cards){
@@ -141,6 +148,9 @@
 			});
 		}
 		resultMessage += self.checkBoard(cards, board);
+		if(resultMessage==""){		
+			resultMessage = self.getHighCard(cards, board);			
+		}
 		return resultMessage;
 	},
 	checkCard: function(card, count, board){
@@ -192,6 +202,25 @@
 						}						
 				});
 				return resultMessage;
+	},
+	
+	getHighCard: function(cards, board){
+		var resultMessage = "";
+		var hand = [];
+		$.each(board, function(i){hand.push(board[i]);});
+		$.each(cards, function(i){hand.push(cards[i]);});
+			var min = hand[0].rank;
+			var card = hand[0];
+			var len = hand.length;
+			for (var i = 1; i < len; i++){ 
+				if (hand[i].rank < min){
+					min = hand[i].rank;
+					card = hand[i];
+				}
+			}
+			resultMessage = " " +card.valueName + " High";
+			return resultMessage;
+	
 	}
 	
 }
