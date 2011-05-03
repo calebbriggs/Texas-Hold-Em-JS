@@ -92,6 +92,11 @@
 		
 		resultMessage += self.checkBoard(cards, board);
 		
+		var flushMessage = self.checkFlush(cards, board);
+		
+		if (flushMessage != "")
+			resultMessage = flushMessage;
+		
 		if(resultMessage==""){		
 			resultMessage = self.getHighCard(cards, board);			
 		}
@@ -119,6 +124,12 @@
 			});
 		}
 		resultMessage += self.checkBoard(cards, board);
+		
+		var flushMessage = self.checkFlush(cards, board);
+		
+		if (flushMessage != "")
+			resultMessage = flushMessage;
+		
 		if(resultMessage==""){		
 			resultMessage = self.getHighCard(cards, board);			
 		}
@@ -148,6 +159,12 @@
 			});
 		}
 		resultMessage += self.checkBoard(cards, board);
+		
+		var flushMessage = self.checkFlush(cards, board);
+		
+		if (flushMessage != "")
+			resultMessage = flushMessage;
+		
 		if(resultMessage==""){		
 			resultMessage = self.getHighCard(cards, board);			
 		}
@@ -209,6 +226,13 @@
 		var hand = [];
 		$.each(board, function(i){hand.push(board[i]);});
 		$.each(cards, function(i){hand.push(cards[i]);});
+			
+			return this.highCard(hand);
+	
+	},
+	
+	highCard: function(hand){
+	
 			var min = hand[0].rank;
 			var card = hand[0];
 			var len = hand.length;
@@ -219,8 +243,25 @@
 				}
 			}
 			resultMessage = " " +card.valueName + " High";
-			return resultMessage;
+			return  resultMessage;
+	},
 	
+	checkFlush: function(cards, board){
+		var hand = [];
+		var self = this;
+		$.each(board, function(i){hand.push(board[i]);});
+		$.each(cards, function(i){hand.push(cards[i]);});
+		
+		var suited = $.grep(hand, function(c) {return c.suit== cards[0].suit});
+		
+		if(suited.length > 4)
+			return self.highCard(suited) + " " + cards[0].suit + " Flush";
+		var suited2 = $.grep(hand, function(c) {return c.suit== cards[1].suit});
+		
+		if(suited2.length > 4)
+			return self.highCard(suited2) + " " + cards[0].suit + " Flush";
+		
+		return "";
 	}
 	
 }
